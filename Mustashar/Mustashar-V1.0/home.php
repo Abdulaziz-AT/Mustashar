@@ -123,9 +123,144 @@ if (mysqli_num_rows($result) > 0) {
     </div>
   </nav>
 
+  <style>
+    .consultant-card {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+      margin-bottom: 20px;
+    }
+
+    .consultant-card:hover {
+      transform: scale(1.05);
+    }
+
+    .filter-btn-group {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .filter-btn-group .btn {
+      margin: 5px;
+    }
+
+    .consultant-card img {
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    .consultant-info {
+      padding: 20px;
+    }
+
+    .filter-btn-group .btn.active {
+      background-color: #343a40;
+      color: #fff;
+    }
+  </style>
 
 
 
+<!-- View all consultants -->
+
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Our Consultants</h2>
+
+    <!-- Filter Buttons -->
+    <div class="filter-btn-group">
+      <button class="btn btn-outline-dark active" onclick="filterConsultants('all')">All</button>
+      <button class="btn btn-outline-dark" onclick="filterConsultants('uxui')">UX/UI</button>
+      <button class="btn btn-outline-dark" onclick="filterConsultants('req')">Requirements Gathering</button>
+      <button class="btn btn-outline-dark" onclick="filterConsultants('qa')">Quality Assurance</button>
+      <button class="btn btn-outline-dark" onclick="filterConsultants('pm')">Project Management</button>
+    </div>
+
+    <!-- Consultants List -->
+    <div class="row" id="consultantsList">
+      <!-- Sample Consultant Card -->
+      <div class="col-md-4 mb-4 consultant-card" data-category="uxui">
+        <img src="consultant1.jpg" class="img-fluid" alt="Consultant 1">
+        <div class="consultant-info">
+          <h4>John Doe</h4>
+          <p>Specialization: UX/UI Design</p>
+          <p>Rate: $50/hr</p>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4 consultant-card" data-category="req">
+        <img src="consultant2.jpg" class="img-fluid" alt="Consultant 2">
+        <div class="consultant-info">
+          <h4>Jane Smith</h4>
+          <p>Specialization: Requirements Gathering</p>
+          <p>Rate: $60/hr</p>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4 consultant-card" data-category="req">
+        <img src="consultant3.jpg" class="img-fluid" alt="Consultant 3">
+        <div class="consultant-info">
+          <h4>Abdulaziz Altekhaifi</h4>
+          <p>Specialization: Requirements Gathering</p>
+          <p>Rate: $65/hr</p>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4 consultant-card" data-category="qa">
+        <img src="consultant3.jpg" class="img-fluid" alt="Consultant 4">
+        <div class="consultant-info">
+          <h4>Abdulelah Alothman</h4>
+          <p>Specialization: Quality Assurance</p>
+          <p>Rate: $55/hr</p>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4 consultant-card" data-category="pm">
+        <img src="consultant3.jpg" class="img-fluid" alt="Consultant 5">
+        <div class="consultant-info">
+          <h4>Faisal Aljeraiwy</h4>
+          <p>Specialization: Project Managements</p>
+          <p>Rate: $60/hr</p>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4 consultant-card" data-category="uxui">
+        <img src="consultant3.jpg" class="img-fluid" alt="Consultant 6">
+        <div class="consultant-info">
+          <h4>Abdulmajeed Albabtain</h4>
+          <p>Specialization: UX/UI</p>
+          <p>Rate: $55/hr</p>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4 consultant-card" data-category="qa">
+        <img src="consultant3.jpg" class="img-fluid" alt="Consultant 7">
+        <div class="consultant-info">
+          <h4>Chris Evans</h4>
+          <p>Specialization: Quality Assurance</p>
+          <p>Rate: $55/hr</p>
+        </div>
+      </div>
+
+      <!-- Add more consultant cards as needed -->
+    </div>
+  </div>
+
+  <script>
+    function filterConsultants(category) {
+      const consultants = document.querySelectorAll('.consultant-card');
+      consultants.forEach(consultant => {
+        consultant.style.display = category === 'all' || consultant.getAttribute('data-category') === category ? 'block' : 'none';
+      });
+      document.querySelectorAll('.filter-btn-group .btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelector(`[onclick="filterConsultants('${category}')"]`).classList.add('active');
+    }
+  </script>
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 </body>
