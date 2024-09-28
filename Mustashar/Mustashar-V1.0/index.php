@@ -31,7 +31,7 @@ if (isset($_SESSION["user"])) {
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#" onclick="toggleAbout()">About</a>
+            <a class="nav-link" href="#" onclick="toggleAbout()">About/Contact Us</a>
           </li>
         </ul>
       </div>
@@ -60,6 +60,13 @@ if (isset($_SESSION["user"])) {
       <h2 class="text-center mt-5 mb-4">Contact Us</h2>
       <p class="lead text-center">Email: <a href="mailto:abdulaziz.at00@gmail.com">abdulaziz.at00@gmail.com</a></p>
       <p class="lead text-center">WhatsApp: +966532606063</p>
+      
+      <div class="text-center">
+        <p>Follow us:</p>
+       <a href="#" class="text-white me-2"><i class="bi bi-facebook"></i></a>
+       <a href="#" class="text-white me-2"><i class="bi bi-twitter"></i></a>
+       <a href="#" class="text-white me-2"><i class="bi bi-linkedin"></i></a>
+      </div>
 
       <div class="container text-center mt-5">
         <p class="lead">&copy; Mustashar 2024</p>
@@ -441,6 +448,14 @@ if (isset($_SESSION["user"])) {
     </div>
   </div>
 </section>
+
+<!-- Footer -->
+<footer class="bg-secondary text-white mt-0">
+  <div class="bg-dark text-center py-3">
+    <p class="mb-0">&copy; Mustashar 2024. All Rights Reserved.</p>
+  </div>
+</footer>
+
 
 
 
