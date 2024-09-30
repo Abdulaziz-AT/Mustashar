@@ -6,13 +6,16 @@ if (!isset($_SESSION["user"])) {
 }
 
 $user_id = $_SESSION['user_id'];
-$usernameSQL = "SELECT username FROM users WHERE id=$user_id";
+$usernameSQL = "SELECT username, email, bio, phone_number FROM users WHERE id=$user_id";
 
 require_once "database.php";
 $result = mysqli_query($conn, $usernameSQL);
 if (mysqli_num_rows($result) > 0) {
   $row = mysqli_fetch_assoc($result);
   $username = $row["username"];
+  $email = $row["email"];
+  $bio = $row["bio"];
+  $phone_number = $row["phone_number"];
 }
 
 ?>
@@ -117,19 +120,36 @@ if (mysqli_num_rows($result) > 0) {
   </style>
 
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">&copy; Mustashar</a>
-      <form action="logout.php" method="post">
-        <div class="navbar-nav">
-          <button type="submit" class="btn btn-danger" style="border: 1px solid transparent; padding: 8px 16px;">Sign
-            out</button>
-        </div>
-      </form>
-
+<!-- Nav bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">&copy; Mustashar</a>
+    <div class="navbar-nav ms-auto">
+      <!-- Profile Section -->
+      <a href="viewprofile.php">
+        <img src="profile-icon.svg" alt="Profile Photo" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
+      </a>
     </div>
-  </nav>
+  </div>
+</nav>
 
+
+
+<!-- Search bar -->
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Find Your Perfect Consultant</h2>
+  <p class="text-center text-muted mb-4">Looking for specific expertise? Use our search to find the consultant that best matches your project needs and skill requirements.</p>
+  
+  <!-- Search Bar -->
+  <div class="input-group mb-5">
+    <input type="text" id="consultantSearch" class="form-control" placeholder="Search consultants by name, specialization, or rate" aria-label="Search consultants">
+    <button class="btn btn-dark" type="button" onclick="searchConsultants()">Search</button>
+  </div>
+</div>
+
+
+
+  <!-- View all consultans -->
   <style>
     .consultant-card {
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -166,10 +186,6 @@ if (mysqli_num_rows($result) > 0) {
     }
   </style>
 
-
-
-<!-- View all consultants -->
-
   <div class="container mt-5">
     <h2 class="text-center mb-4">Our Consultants</h2>
 
@@ -186,7 +202,7 @@ if (mysqli_num_rows($result) > 0) {
     <div class="row" id="consultantsList">
       <!-- Sample Consultant Card -->
       <div class="col-md-4 mb-4 consultant-card" data-category="uxui">
-        <img src="consultant1.jpg" class="img-fluid" alt="Consultant 1">
+        <img src="profile-icon.svg" class="img-fluid" alt="Consultant 1">
         <div class="consultant-info">
           <h4>John Doe</h4>
           <p>Specialization: UX/UI Design</p>
@@ -195,7 +211,7 @@ if (mysqli_num_rows($result) > 0) {
       </div>
 
       <div class="col-md-4 mb-4 consultant-card" data-category="req">
-        <img src="consultant2.jpg" class="img-fluid" alt="Consultant 2">
+        <img src="profile-icon.svg" class="img-fluid" alt="Consultant 2">
         <div class="consultant-info">
           <h4>Jane Smith</h4>
           <p>Specialization: Requirements Gathering</p>
@@ -204,7 +220,7 @@ if (mysqli_num_rows($result) > 0) {
       </div>
 
       <div class="col-md-4 mb-4 consultant-card" data-category="req">
-        <img src="consultant3.jpg" class="img-fluid" alt="Consultant 3">
+        <img src="profile-icon.svg" class="img-fluid" alt="Consultant 3">
         <div class="consultant-info">
           <h4>Abdulaziz Altekhaifi</h4>
           <p>Specialization: Requirements Gathering</p>
@@ -213,7 +229,7 @@ if (mysqli_num_rows($result) > 0) {
       </div>
 
       <div class="col-md-4 mb-4 consultant-card" data-category="qa">
-        <img src="consultant3.jpg" class="img-fluid" alt="Consultant 4">
+        <img src="profile-icon.svg" class="img-fluid" alt="Consultant 4">
         <div class="consultant-info">
           <h4>Abdulelah Alothman</h4>
           <p>Specialization: Quality Assurance</p>
@@ -222,7 +238,7 @@ if (mysqli_num_rows($result) > 0) {
       </div>
 
       <div class="col-md-4 mb-4 consultant-card" data-category="pm">
-        <img src="consultant3.jpg" class="img-fluid" alt="Consultant 5">
+        <img src="profile-icon.svg" class="img-fluid" alt="Consultant 5">
         <div class="consultant-info">
           <h4>Faisal Aljeraiwy</h4>
           <p>Specialization: Project Managements</p>
@@ -231,7 +247,7 @@ if (mysqli_num_rows($result) > 0) {
       </div>
 
       <div class="col-md-4 mb-4 consultant-card" data-category="uxui">
-        <img src="consultant3.jpg" class="img-fluid" alt="Consultant 6">
+        <img src="profile-icon.svg" class="img-fluid" alt="Consultant 6">
         <div class="consultant-info">
           <h4>Abdulmajeed Albabtain</h4>
           <p>Specialization: UX/UI</p>
@@ -240,7 +256,7 @@ if (mysqli_num_rows($result) > 0) {
       </div>
 
       <div class="col-md-4 mb-4 consultant-card" data-category="qa">
-        <img src="consultant3.jpg" class="img-fluid" alt="Consultant 7">
+        <img src="profile-icon.svg" class="img-fluid" alt="Consultant 7">
         <div class="consultant-info">
           <h4>Chris Evans</h4>
           <p>Specialization: Quality Assurance</p>

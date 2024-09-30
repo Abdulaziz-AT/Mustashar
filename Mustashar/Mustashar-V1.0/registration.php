@@ -15,13 +15,21 @@ if(isset($_POST["signup"])){
     $username=$_POST["username"];
     $email=$_POST["email"];
     $password=$_POST["password"];
+    $confirm_password=$_POST["confirm_password"];
+    $phone_number=$_POST["phone_number"];
+    $birthdate=$_POST["birthdate"];
 
 
     $passwordHash=password_hash($password, PASSWORD_DEFAULT);
 
     $errors= array();
 
-    if( empty($username) or empty($email) or empty($password) ) {
+    if($password != $confirm_password){
+        array_push($errors,"Confirmation password is different from the password");
+    }
+
+
+    if( empty($username) or empty($email) or empty($password) or empty($phone_number) or empty($birthdate) ) {
 
         array_push($errors,"All fields are required");
 
@@ -53,12 +61,12 @@ if(isset($_POST["signup"])){
         //we will insert data to database
         require_once "database.php";
 
-        $sql="INSERT INTO users (username,email,password) VALUES ( ? , ? , ? ) ";
+        $sql="INSERT INTO users (username,email,password,phone_number,birthdate) VALUES ( ? , ? , ? , ? , ? ) ";
         $stmt=mysqli_stmt_init($conn);
         $prepareStmt=mysqli_stmt_prepare($stmt,$sql);
 
         if ($prepareStmt) {
-            mysqli_stmt_bind_param($stmt,"sss",$username, $email, $passwordHash);
+            mysqli_stmt_bind_param($stmt,"sssss",$username, $email, $passwordHash, $phone_number, $birthdate);
             mysqli_stmt_execute($stmt);
             echo "<div class='alert alert-success'>Sign up successfully.</div>";
             echo "<meta http-equiv='refresh' content='2;url=index.php'>"; // Redirect after 2 seconds

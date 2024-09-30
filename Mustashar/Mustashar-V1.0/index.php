@@ -178,68 +178,92 @@ if (isset($_SESSION["user"])) {
     </div>
   </div>
 
-  <!-- Signup Modal -->
-  <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="signupModalLabel">Create your account</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form action="registration.php" method="post">
-            <div class="mb-3 form-group">
-              <label for="signupEmail" class="form-label">Username</label>
-              <input type="text" class="form-control" id="signupUsername" aria-describedby="signupEmailHelp"
-                name="username">
-            </div>
-            <div class="mb-3 form-group">
-              <label for="signupEmail" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="signupEmail" aria-describedby="signupEmailHelp" name="email">
-              <div id="signupEmailHelp" class="form-text">We'll never share your email with anyone else.</div>
-            </div>
-            <div class="mb-3 form-group">
-              <label for="signupPassword" class="form-label">Password</label>
-              <div class="input-group">
-                <input type="password" class="form-control" id="signupPassword" name="password">
-              </div>
-              <span class="form-text" id="passwordRestrictions">
-                Password must contain at least:
-                <ul>
-                  <li id="length">8 characters</li>
-                  <li id="lowercase">1 lowercase letter</li>
-                  <li id="uppercase">1 uppercase letter</li>
-                  <li id="number">1 number</li>
-                </ul>
-              </span>
-            </div>
-            <div class="d-grid gap-2 form-group">
-              <button class="btn btn-primary mb-3" type="submit" name="signup" value="signup">Sign up</button>
-            </div>
-          </form>
-          
-          <div class="text-center mb-3">
-            <hr style="border-color: black; width: 40%; display: inline-block; vertical-align: middle;">
-            <span
-              style="padding: 0 5px; font-size: smaller; background-color: rgba(255, 255, 255, 0.5); color: black; vertical-align: middle;">OR</span>
-            <hr style="border-color: black; width: 40%; display: inline-block; vertical-align: middle;">
+<!-- Signup Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="signupModalLabel">Create your account</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="registration.php" method="post">
+          <!-- Username Field -->
+          <div class="mb-3 form-group">
+            <label for="signupUsername" class="form-label">Username</label>
+            <input type="text" class="form-control" id="signupUsername" name="username" required>
           </div>
 
-          <div class="d-grid gap-2">
-            <button class="btn btn-light btn-lg btn-block d-flex justify-content-center align-items-center mb-2">
-              <img src="google.png" alt="Google Logo" style="height: 30px;">
-              <span class="ms-2"><i class="fab fa-google me-2"></i> Continue with Google</span>
-            </button>
-            <button class="btn btn-dark btn-lg btn-block d-flex justify-content-center align-items-center">
-              <img src="github.png" alt="Github Logo" style="height: 30px;">
-              <span class="ms-2"><i class="fab fa-google me-2"></i> Continue with Github</span>
-            </button>
+          <!-- Email Field -->
+          <div class="mb-3 form-group">
+            <label for="signupEmail" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="signupEmail" name="email" required>
+            <div id="signupEmailHelp" class="form-text">We'll never share your email with anyone else.</div>
           </div>
-  
+
+          <!-- Password Field -->
+          <div class="mb-3 form-group">
+            <label for="signupPassword" class="form-label">Password</label>
+            <div class="input-group">
+              <input type="password" class="form-control" id="signupPassword" name="password" required>
+            </div>
+            <span class="form-text" id="passwordRestrictions">
+              Password must contain at least:
+              <ul>
+                <li id="length">8 characters</li>
+                <li id="lowercase">1 lowercase letter</li>
+                <li id="uppercase">1 uppercase letter</li>
+                <li id="number">1 number</li>
+              </ul>
+            </span>
+          </div>
+
+          <!-- Confirm Password Field -->
+          <div class="mb-3 form-group">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirm_password" required>
+          </div>
+
+          <!-- Phone Number Field -->
+          <div class="mb-3 form-group">
+            <label for="signupPhone" class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" id="signupPhone" name="phone_number" placeholder="0551234567" required>
+          </div>
+
+          <!-- Birthdate Field -->
+          <div class="mb-3 form-group">
+            <label for="signupBirthdate" class="form-label">Birthdate</label>
+            <input type="date" class="form-control" id="signupBirthdate" name="birthdate" required>
+          </div>
+
+          <!-- Sign Up Button -->
+          <div class="d-grid gap-2 form-group">
+            <button class="btn btn-primary mb-3" type="submit" name="signup" value="signup">Sign up</button>
+          </div>
+        </form>
+
+        <div class="text-center mb-3">
+          <hr style="border-color: black; width: 40%; display: inline-block; vertical-align: middle;">
+          <span style="padding: 0 5px; font-size: smaller; background-color: rgba(255, 255, 255, 0.5); color: black; vertical-align: middle;">OR</span>
+          <hr style="border-color: black; width: 40%; display: inline-block; vertical-align: middle;">
         </div>
+
+        <!-- Google and Github Login Buttons -->
+        <div class="d-grid gap-2">
+          <button class="btn btn-light btn-lg btn-block d-flex justify-content-center align-items-center mb-2">
+            <img src="google.png" alt="Google Logo" style="height: 30px;">
+            <span class="ms-2"><i class="fab fa-google me-2"></i> Continue with Google</span>
+          </button>
+          <button class="btn btn-dark btn-lg btn-block d-flex justify-content-center align-items-center">
+            <img src="github.png" alt="Github Logo" style="height: 30px;">
+            <span class="ms-2"><i class="fab fa-github me-2"></i> Continue with Github</span>
+          </button>
+        </div>
+
       </div>
     </div>
   </div>
+</div>
 
 
   <script>
@@ -296,6 +320,70 @@ if (isset($_SESSION["user"])) {
   <!--
     Under here is everything under the showcase
   -->
+
+ <!-- Slideshow Section -->
+<section class="container my-5">
+  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+    </div>
+    <div class="carousel-inner">
+
+      <div class="carousel-item active">
+        <img src="qualityslidephoto.jpg" class="d-block w-100 fixed-size" alt="Quality Assurance">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Quality Assurance</h5>
+          <p>Guaranteeing error-free software with meticulous testing.</p>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <img src="pmslidephoto.jpg" class="d-block w-100 fixed-size" alt="Project Management">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Project Management</h5>
+          <p>Guiding projects to success with expert planning.</p>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <img src="reqslidephoto.jpg" class="d-block w-100 fixed-size" alt="Requirement Gathering">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Requirement Gathering</h5>
+          <p>Ensuring clear and actionable project objectives.</p>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <img src="ux-uislidephoto.jpg" class="d-block w-100 fixed-size" alt="UX/UI Design">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>UX/UI Design</h5>
+          <p>Delivering user-friendly interfaces for seamless experiences.</p>
+        </div>
+      </div>
+
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</section>
+
+<!-- Add the following CSS to ensure the images have a fixed size -->
+<style>
+  .fixed-size {
+    height: 500px; 
+    object-fit: cover; /* Aspect ratio */
+  }
+</style>
+
 
  <!-- Services Section -->
 <section class="bg-light text-dark p-5">
