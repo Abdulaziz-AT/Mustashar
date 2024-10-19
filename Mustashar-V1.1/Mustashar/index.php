@@ -141,34 +141,61 @@ if (isset($_SESSION["user"])) {
 </nav>
 
   <!-- Login Modal -->
-  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="loginModalLabel">Log in</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Log in</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ul class="nav nav-tabs" id="loginTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="user-tab" data-bs-toggle="tab" data-bs-target="#user-login" type="button" role="tab" aria-controls="user-login" aria-selected="true">User</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="consultant-tab" data-bs-toggle="tab" data-bs-target="#consultant-login" type="button" role="tab" aria-controls="consultant-login" aria-selected="false">Consultant</button>
+          </li>
+        </ul>
+        <div class="tab-content" id="loginTabsContent">
+          <div class="tab-pane fade show active" id="user-login" role="tabpanel" aria-labelledby="user-tab">
+            <form action="login.php" method="post" class="mt-3">
+              <div class="mb-3 form-group2">
+                <label for="loginEmail" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="loginEmail" aria-describedby="loginEmailHelp" name="email2">
+                <div id="loginEmailHelp" class="form-text">We'll never share your email with anyone else.</div>
+              </div>
+              <div class="mb-3 form-group2">
+                <label for="loginPassword" class="form-label">Password</label>
+                <input type="password" class="form-control" id="loginPassword" name="password2">
+              </div>
+              <div class="d-grid gap-2 form-group2">
+                <button class="btn btn-primary" type="submit" value="login" name="login">Log in</button>
+              </div>
+            </form>
+          </div>
+          <div class="tab-pane fade" id="consultant-login" role="tabpanel" aria-labelledby="consultant-tab">
+            <form action="consultant_login.php" method="post" class="mt-3">
+              <div class="mb-3 form-group2">
+                <label for="consultantLoginEmail" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="consultantLoginEmail" name="email">
+              </div>
+              <div class="mb-3 form-group2">
+                <label for="consultantLoginPassword" class="form-label">Password</label>
+                <input type="password" class="form-control" id="consultantLoginPassword" name="password">
+              </div>
+              <div class="d-grid gap-2 form-group2">
+                <button class="btn btn-primary" type="submit" name="consultant_login" value="login">Log in as Consultant</button>
+              </div>
+            </form>
+          </div>
         </div>
-        <div class="modal-body">
-          <form action="login.php" method="post">
-            <div class="mb-3 form-group2">
-              <label for="loginEmail" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="loginEmail" aria-describedby="loginEmailHelp" name="email2">
-              <div id="loginEmailHelp" class="form-text">We'll never share your email with anyone else.</div>
-            </div>
-            <div class="mb-3 form-group2">
-              <label for="loginPassword" class="form-label">Password</label>
-              <input type="password" class="form-control" id="loginPassword" name="password2">
-            </div>
-            <div class="d-grid gap-2 form-group2">
-              <button class="btn btn-primary" type="submit" value="login" name="login">Log in</button>
-            </div>
-          </form>
-          <p class="mt-3">Don't have an account? <button class="btn btn-link" id="signupBtn">Sign up</button></p>
-        </div>
+        <p class="mt-3">Don't have an account? <button class="btn btn-link" id="signupBtn">Sign up</button></p>
       </div>
     </div>
   </div>
-
+</div>
 <!-- Signup Modal -->
 <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -255,7 +282,110 @@ if (isset($_SESSION["user"])) {
     </div>
   </div>
 </div>
+<!-- Consultant Login Modal -->
+<div class="modal fade" id="consultantLoginModal" tabindex="-1" aria-labelledby="consultantLoginModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="consultantLoginModalLabel">Consultant Login</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="consultant_login.php" method="post">
+          <!-- Email Field -->
+          <div class="mb-3 form-group">
+            <label for="consultantLoginEmail" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="consultantLoginEmail" name="email" required>
+          </div>
 
+          <!-- Password Field -->
+          <div class="mb-3 form-group">
+            <label for="consultantLoginPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="consultantLoginPassword" name="password" required>
+          </div>
+
+          <!-- Login Button -->
+          <div class="d-grid gap-2 form-group">
+            <button class="btn btn-primary mb-3" type="submit" name="consultant_login" value="login">Login as Consultant</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Consultant Registration Modal -->
+<div class="modal fade" id="consultantRegisterModal" tabindex="-1" aria-labelledby="consultantRegisterModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="consultantRegisterModalLabel">Create Consultant Account</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="consultant_registration.php" method="post">
+          <!-- First Name Field -->
+          <div class="mb-3 form-group">
+            <label for="consultantFirstName" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="consultantFirstName" name="first_name" required>
+          </div>
+
+          <!-- Last Name Field -->
+          <div class="mb-3 form-group">
+            <label for="consultantLastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="consultantLastName" name="last_name" required>
+          </div>
+
+          <!-- Email Field -->
+          <div class="mb-3 form-group">
+            <label for="consultantEmail" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="consultantEmail" name="email" required>
+          </div>
+
+          <!-- Password Field -->
+          <div class="mb-3 form-group">
+            <label for="consultantPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="consultantPassword" name="password" required>
+          </div>
+
+          <!-- Confirm Password Field -->
+          <div class="mb-3 form-group">
+            <label for="consultantConfirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="consultantConfirmPassword" name="confirm_password" required>
+          </div>
+
+          <!-- Age Field -->
+          <div class="mb-3 form-group">
+            <label for="consultantAge" class="form-label">Age</label>
+            <input type="number" class="form-control" id="consultantAge" name="age" required>
+          </div>
+
+          <!-- Phone Number Field -->
+          <div class="mb-3 form-group">
+            <label for="consultantPhone" class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" id="consultantPhone" name="phone_number" required>
+          </div>
+
+          <!-- Expertise Field -->
+          <div class="mb-3 form-group">
+            <label for="consultantExpertise" class="form-label">Expertise</label>
+            <input type="text" class="form-control" id="consultantExpertise" name="expertise" required>
+          </div>
+
+          <!-- Experience Field -->
+          <div class="mb-3 form-group">
+            <label for="consultantExperience" class="form-label">Experience (years)</label>
+            <input type="number" class="form-control" id="consultantExperience" name="experience" required>
+          </div>
+
+          <!-- Register Button -->
+          <div class="d-grid gap-2 form-group">
+            <button class="btn btn-primary mb-3" type="submit" name="consultant_register" value="register">Register as Consultant</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
   <script>
     // Show the signup modal when "Sign up line" button is clicked
@@ -311,6 +441,7 @@ if (isset($_SESSION["user"])) {
 
 
 <!--Hero Section-->
+<!--Hero Section-->
 <section class="bg-dark text-light p-5 text-center text-sm-start">
   <div class="container">
     <div class="d-sm-flex align-items-center justify-content-between">
@@ -318,12 +449,21 @@ if (isset($_SESSION["user"])) {
         <h1 id="typedText" class="text-warning"></h1>
         <p class="lead my-3">Mustashar connects you with professional consultants to help you solve your development challenges
            and guide you through your coding journey. Whether you need expert advice or personalized support, we're here to help you grow.</p>
-        <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#signupModal">Join Us Now</button>
+        <button class="btn btn-primary btn-lg me-3" data-bs-toggle="modal" data-bs-target="#signupModal">Join Us Now</button>
+        <button class="btn btn-outline-light btn-lg" data-bs-toggle="modal" data-bs-target="#consultantRegisterModal">Join as Consultant</button>
       </div>
       <img class="img-fluid w-50 d-none d-sm-block" src="showcase.svg" alt="">
     </div>
   </div>
 </section>
+
+<style>
+  .btn-outline-light:hover {
+    background-color: #f8f9fa;
+    color: #212529;
+    transition: all 0.3s ease;
+  }
+</style>
 
 <!-- Typing Animation CSS -->
 <style>
